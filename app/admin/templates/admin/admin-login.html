@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+{% for cat, msg in get_flashed_messages(True) %}
+<div>{{ msg }}</div>
+{% endfor %}
+<form method="post">
+  <input type="text" name="login" id="login" class="form-control" placeholder="Логин"><br>
+  <input type="text" name="password" id="password" class="form-control" placeholder="Пароль"><br>
+  <input type="submit" class="btn btn-outline-primary" value="Войти">
+</form>
+{% endblock %}
