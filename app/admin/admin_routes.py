@@ -96,3 +96,14 @@ def edit_article(post_id):
             return 'Error'
     else:
         return render_template('/admin/edit-article.html', post=post)
+
+
+@admin.route('/delete_article/<int:post_id>')
+def delete_article(post_id):
+    post = Post.query.get(post_id)
+    try:
+        db.session.delete(post)
+        db.session.commit()
+        return redirect(url_for('.edit_articles'))
+    except:
+        return 'Error'
