@@ -66,3 +66,33 @@ def create_article():
             return 'Error'
     else:
         return render_template('/admin/create-articles.html')
+
+
+@admin.route('/edit_article/')
+def edit_articles():
+    page = request.args.get('page')
+    if page and page.isdigit():
+        page = int(page)
+    else:
+        page = 1
+
+    articles_list = Post.query
+    pages = articles_list.paginate(page=page, per_page=4)
+    return render_template('/admin/edit-articles.html', pages=pages)
+
+
+
+@admin.route('/edit_article/<int:post_id>', methods=['POST', 'GET'])
+def edit_article(post_id):
+    post = Post.query.get(post_id)
+    if request.method == 'POST':
+        try:
+            post.title = request.form['title']
+            post.header = request.form['header']
+            post.text = request.form['text']
+            db.session.commit()
+            return redirect(url_for('.edit_articles'))
+        except:
+            return 'Error'
+    else:
+        return render_template('/admin/edit-article.html', post=post)
