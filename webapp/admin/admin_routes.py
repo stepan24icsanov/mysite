@@ -3,9 +3,9 @@ from flask import (session,
                    redirect,
                    url_for,
                    request)
-from app.admin import admin
-from app.models import Post
-from app import db
+from webapp.admin import admin
+from webapp.models import Post
+from webapp import db
 
 
 def login_admin():
@@ -79,7 +79,6 @@ def edit_articles():
     articles_list = Post.query
     pages = articles_list.paginate(page=page, per_page=4)
     return render_template('/admin/edit-articles.html', pages=pages)
-
 
 
 @admin.route('/edit_article/<int:post_id>', methods=['POST', 'GET'])

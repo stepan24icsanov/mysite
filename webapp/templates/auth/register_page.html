@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+
+
+{% block body %}
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+<form class="form-signin" method="post">
+    <div class="form-label-group">
+        <input type="email" name="login" id="login" class="form-control" placeholder="Email address" required="" autofocus="">
+        <label for="login">Email address</label>
+    </div>
+    <div class="form-label-group">
+        <input type="password" name="password" id="password" class="form-control" placeholder="Password" required="">
+        <label for="password">Password</label>
+    </div>
+    <div class="form-label-group">
+        <input type="password" name="password2" id="password2" class="form-control" placeholder="Повторите пароль" required="">
+        <label for="password2">Password</label>
+    </div>
+    <input type="submit" class="btn btn-outline-primary" value="Зарегистрироваться">
+    <p class="mt-5 mb-3 text-muted text-center">© 2002-2020</p>
+</form>
+{% endblock %}

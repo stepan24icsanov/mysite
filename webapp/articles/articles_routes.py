@@ -1,8 +1,6 @@
 from flask import request, render_template
-from app.models import Post
-from app.articles import arti
-
-
+from webapp.models import Post
+from webapp.articles import arti
 
 
 @arti.route('/')

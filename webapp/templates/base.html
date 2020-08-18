@@ -12,6 +12,13 @@
     <a class="p-2 text-dark" href="/">Главная страница</a>
     <a class="p-2 text-dark" href="/articles">Статьи</a>
     <a class="p-2 text-dark" href="/about">О сайте</a>
+    {% if current_user.is_authenticated %}
+    <a class="p-2 text-dark" href="#">{{ current_user.user_name }}</a>
+    <a class="p-2 text-dark" href="/logout">Выйти</a>
+    {% else %}
+    <a class="p-2 text-dark" href="/register">Зарегистрироваться</a>
+    <a class="p-2 text-dark" href="/login">Войти</a>
+    {% endif %}
   </nav>
 
 </div>
