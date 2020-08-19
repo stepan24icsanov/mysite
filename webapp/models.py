@@ -3,6 +3,7 @@ from flask_login import UserMixin
 from webapp import db
 from webapp.auth import login_manager
 
+
 class Post(db.Model):
     post_id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(32), nullable=False)

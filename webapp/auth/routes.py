@@ -26,7 +26,7 @@ def login_page():
 @app.route('/register', methods=['GET', 'POST'])
 def register_page():
     if request.method == 'POST':
-        # email = request.form['email']
+        email = request.form['email']
         login = request.form['login']
         password = request.form['password']
         password2 = request.form['password2']
@@ -34,7 +34,7 @@ def register_page():
             flash('введенные пароли не совпадают')
             return redirect(url_for('register_page'))
 
-        new_user = User(user_name=login, user_password=password, user_email='123321')
+        new_user = User(user_name=login, user_password=password, user_email=email)
         try:
             db.session.add(new_user)
             db.session.commit()

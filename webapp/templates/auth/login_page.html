@@ -5,21 +5,21 @@
 {% block body %}
 {% with messages = get_flashed_messages() %}
   {% if messages %}
-    <ul class=flashes>
+    <div class=flashes>
     {% for message in messages %}
-      <li>{{ message }}</li>
+      <div class="alert alert-danger">{{ message }}</div>
     {% endfor %}
-    </ul>
+    </div>
   {% endif %}
 {% endwith %}
 <form class="form-signin" method="post">
     <div class="form-label-group">
-        <input type="text" name="login" id="login" class="form-control" placeholder="Email address" required="" autofocus="">
-        <label for="login">Email address</label>
+        <input type="text" name="login" id="login" class="form-control" placeholder="Логин" required="" autofocus="">
+        <label for="login">Логин</label>
     </div>
     <div class="form-label-group">
         <input type="password" name="password" id="password" class="form-control" placeholder="Password" required="">
-        <label for="password">Password</label>
+        <label for="password">Пароль</label>
     </div>
 
     <input type="submit" class="btn btn-outline-primary" value="Войти">
