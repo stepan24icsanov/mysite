@@ -17,4 +17,4 @@ app.register_blueprint(arti)
 from webapp import routes
 from webapp.auth import login_manager
 from webapp.models import *
-import webapp.auth.routes
+import webapp.auth.auth_routes

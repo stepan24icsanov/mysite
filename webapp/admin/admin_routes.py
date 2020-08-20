@@ -3,8 +3,9 @@ from flask import (session,
                    redirect,
                    url_for,
                    request)
+
 from webapp.admin import admin
-from webapp.models import Post
+from webapp.models import Post, Comment
 from webapp import db
 
 
@@ -100,8 +101,11 @@ def edit_article(post_id):
 @admin.route('/delete_article/<int:post_id>')
 def delete_article(post_id):
     post = Post.query.get(post_id)
+    comments_post = Comment.query.filter_by(post_id=post_id).all()
     try:
         db.session.delete(post)
+        for comment in comments_post:
+            db.session.delete(comment)
         db.session.commit()
         return redirect(url_for('.edit_articles'))
     except:

@@ -6,11 +6,15 @@ from webapp.models import User
 
 
 @app.route('/login', methods=['GET', 'POST'])
-def login_page():
+def user_login_page():
     if request.method == 'POST':
         login = request.form['login']
         password = request.form['password']
         user = User.query.filter_by(user_name=login).first()
+
+        if user is None:
+            flash('Такого пользователя не существует')
+            return redirect(url_for('user_login_page'))
 
         if password == user.user_password:
             login_user(user)
@@ -18,13 +22,13 @@ def login_page():
             return redirect(url_for('index'))
         else:
             flash('Неверный логин или пароль')
-            return redirect(url_for('login_page'))
+            return redirect(url_for('user_login_page'))
     else:
         return render_template('auth/login_page.html')
 
 
 @app.route('/register', methods=['GET', 'POST'])
-def register_page():
+def user_register_page():
     if request.method == 'POST':
         email = request.form['email']
         login = request.form['login']
@@ -32,7 +36,7 @@ def register_page():
         password2 = request.form['password2']
         if password != password2:
             flash('введенные пароли не совпадают')
-            return redirect(url_for('register_page'))
+            return redirect(url_for('user_register_page'))
 
         new_user = User(user_name=login, user_password=password, user_email=email)
         try:
@@ -48,7 +52,7 @@ def register_page():
 
 @app.route('/logout')
 @login_required
-def user_logout():
+def user_logout_page():
     logout_user()
     return redirect(url_for('index'))
 

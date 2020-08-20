@@ -1,5 +1,8 @@
-from flask import request, render_template
-from webapp.models import Post
+from flask import request, render_template, redirect, url_for
+from flask_login import current_user
+
+from webapp import db
+from webapp.models import Post, Comment
 from webapp.articles import arti
 
 
@@ -15,7 +18,19 @@ def articles():
     return render_template('/articles/articles.html', pages=pages)
 
 
-@arti.route('/<int:post_id>')
+@arti.route('/<int:post_id>', methods=['POST', 'GET'])
 def show_post(post_id):
     post = Post.query.get(post_id)
-    return render_template('/articles/article.html', post=post)
+    if request.method == 'GET':
+        comments = Comment.query.filter_by(post_id=post_id).all()
+        return render_template('/articles/article.html', post=post, comments=comments)
+    else:
+        comment_text = request.form['text']
+        comment = Comment(post_id=post_id, user_name=current_user.user_name, text=comment_text)
+        try:
+            db.session.add(comment)
+            db.session.commit()
+        except:
+            return 'Error'
+    comments = Comment.query.filter_by(post_id=post_id).all()
+    return render_template('/articles/article.html', post=post, comments=comments)

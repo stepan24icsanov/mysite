@@ -5,4 +5,29 @@
 <h1>{{ post.title }}</h1>
 <h2>{{ post.header }}</h2>
 <p>{{ post.text }}</p>
+<div class="comments">
+    <h1>Комментарии</h1>
+    {% if current_user.is_authenticated %}
+    <form method="post">
+    <textarea name="text" id="text" cols="" rows="" class="form-control" placeholder="Комментарий"></textarea>
+    <input type="submit" class="btn btn-outline-primary" value="Отправить">
+    {% else %}
+    Войдите или зарегистрируйтесь, чтобы оставить комментарий
+    {% endif %}
+</form>
+
+{% for comment in comments %}
+<div class="card">
+  <div class="card-header">
+    {{ comment.user_name }}
+  </div>
+  <div class="card-body">
+    <blockquote class="blockquote mb-0">
+      <p>{{ comment.text }}</p>
+    </blockquote>
+  </div>
+</div>
+{% endfor %}
+
+</div>
 {% endblock %}

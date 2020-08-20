@@ -27,6 +27,16 @@ class User(db.Model, UserMixin):
         return f'<User {self.user_id}>'
 
 
+class Comment(db.Model):
+    id_comment = db.Column(db.Integer, primary_key=True)
+    post_id = db.Column(db.Integer)
+    user_name = db.Column(db.String())
+    text = db.Column(db.String(320))
+
+    def __repr__(self):
+        return f'<Comment {self.post_id}>'
+
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(user_id)
