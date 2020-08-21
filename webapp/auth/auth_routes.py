@@ -19,6 +19,8 @@ def user_login_page():
         if password == user.user_password:
             login_user(user)
             next_page = request.args.get('next')
+            if next_page:
+                return redirect(next_page)
             return redirect(url_for('index'))
         else:
             flash('Неверный логин или пароль')
@@ -54,7 +56,8 @@ def user_register_page():
 @login_required
 def user_logout_page():
     logout_user()
-    return redirect(url_for('index'))
+    next_page = request.args.get('next')
+    return redirect(next_page)
 
 
 
