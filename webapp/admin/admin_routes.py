@@ -2,7 +2,8 @@ from flask import (session,
                    render_template,
                    redirect,
                    url_for,
-                   request)
+                   request,
+                   flash)
 
 from webapp.admin import admin
 from webapp.models import Post, Comment
@@ -39,6 +40,7 @@ def login():
             login_admin()
             return redirect(url_for('.index'))
         else:
+            flash('Неверный логин или пароль')
             return redirect(url_for('.login'))
 
     return render_template('admin/admin-login.html')

@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
+
 app = Flask(__name__)
 app.secret_key = 'stepan24icsanov'
 DATABASE = '/templates/posts.db'

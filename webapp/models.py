@@ -19,6 +19,7 @@ class User(db.Model, UserMixin):
     user_email = db.Column(db.String(64), nullable=False)
     user_password = db.Column(db.String(32), nullable=False)
     user_name = db.Column(db.String(32), nullable=False, unique=True)
+    user_registration_date = db.Column(db.DateTime)
 
     def get_id(self):
         return (self.user_id)

@@ -1,5 +1,6 @@
 from flask import request, render_template, redirect, flash, url_for
 from flask_login import login_user, login_required, logout_user
+import datetime
 
 from webapp import app, db
 from webapp.models import User
@@ -36,11 +37,15 @@ def user_register_page():
         login = request.form['login']
         password = request.form['password']
         password2 = request.form['password2']
+        user_registration_date = datetime.datetime.utcnow()
         if password != password2:
             flash('введенные пароли не совпадают')
             return redirect(url_for('user_register_page'))
 
-        new_user = User(user_name=login, user_password=password, user_email=email)
+        new_user = User(user_name=login,
+                        user_password=password,
+                        user_email=email,
+                        user_registration_date=user_registration_date)
         try:
             db.session.add(new_user)
             db.session.commit()
