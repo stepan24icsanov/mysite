@@ -4,6 +4,7 @@ from flask import (session,
                    url_for,
                    request,
                    flash)
+import datetime
 
 from webapp.admin import admin
 from webapp.models import Post, Comment
@@ -60,7 +61,8 @@ def create_article():
         title = request.form['title']
         header = request.form['header']
         text = request.form['text']
-        post = Post(title=title, header=header, text=text)
+        post_creation_date = datetime.datetime.utcnow()
+        post = Post(title=title, header=header, text=text, post_creation_date=post_creation_date)
         try:
             db.session.add(post)
             db.session.commit()

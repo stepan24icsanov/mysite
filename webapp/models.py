@@ -9,6 +9,7 @@ class Post(db.Model):
     title = db.Column(db.String(32), nullable=False)
     header = db.Column(db.String(150), nullable=False)
     text = db.Column(db.String(), nullable=False)
+    post_creation_date = db.Column(db.DateTime)
 
     def __repr__(self):
         return '<Post %r>' % self.post_id
@@ -33,6 +34,7 @@ class Comment(db.Model):
     post_id = db.Column(db.Integer)
     user_name = db.Column(db.String())
     text = db.Column(db.String(320))
+    comment_creation_date = db.Column(db.DateTime)
 
     def __repr__(self):
         return f'<Comment {self.post_id}>'

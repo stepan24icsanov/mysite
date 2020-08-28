@@ -4,6 +4,7 @@
 {% block body %}
 <h1>{{ post.title }}</h1>
 <h2>{{ post.header }}</h2>
+<h3>Дата создания: {{ moment(post.post_creation_date, local=False).format('HH:mm | D MMMM YYYY года', refresh=False) }}</h3>
 <p>{{ post.text }}</p>
 <div class="comments">
     <h1>Комментарии</h1>
@@ -28,6 +29,7 @@
   <div class="card-header">
     {{ comment.user_name }}
   </div>
+    <div>{{ moment(comment.comment_creation_date, local=False).format('HH:mm | D MMMM YYYY года', refresh=False) }}</div>
   <div class="card-body">
     <blockquote class="blockquote mb-0">
       <p>{{ comment.text }}</p>

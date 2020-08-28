@@ -1,5 +1,6 @@
 from flask import request, render_template, redirect, url_for
 from flask_login import current_user
+import datetime
 
 from webapp import db
 from webapp.models import Post, Comment
@@ -26,7 +27,11 @@ def show_post(post_id):
         return render_template('/articles/article.html', post=post, comments=comments)
     else:
         comment_text = request.form['text']
-        comment = Comment(post_id=post_id, user_name=current_user.user_name, text=comment_text)
+        comment_creation_date = datetime.datetime.utcnow()
+        comment = Comment(post_id=post_id,
+                          user_name=current_user.user_name,
+                          text=comment_text,
+                          comment_creation_date=comment_creation_date)
         try:
             db.session.add(comment)
             db.session.commit()
