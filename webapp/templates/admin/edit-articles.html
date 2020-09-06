@@ -11,7 +11,9 @@
             <h4 class="card-title">{{ el.title }}</h4>
             <p class="card-text">{{ el.header }}</p>
             <a class="btn btn-primary btn-lg mt-auto" href="./{{ el.post_id }}">Редактировать</a>
-            <a class="btn btn-danger" href="/admin/delete_article/{{ el.post_id }}">Удалить</a>
+            <form action="/admin/delete_article/{{ el.post_id }}">
+                <input class="btn btn-danger btn-lg mt-auto" type="submit" onclick="this.disabled=true;this.parentElement.submit()" value="Удалить">
+            </form>
         </div>
     </div>
 </div>

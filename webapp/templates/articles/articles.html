@@ -2,6 +2,7 @@
 
 {% block title %}
 <title>Список статей</title>
+<script src="{{ url_for('static', filename='js/script_articles.js') }}"></script>
 {% endblock %}
 
 {% block home %}
@@ -10,10 +11,15 @@
 {% block row %}
 
 {% block body %}
+
 {% for el in pages.items %}
 <div class="">
     <div class="card mb-4 shadow-sm" style="min-height: 500px;">
-        {{ moment(el.post_creation_date, local=False).format('HH:mm | D MMMM YYYY года', refresh=False) }}
+        <div id="post-{{ el.post_id }}"></div>
+        <script>
+            {% set post_date = el.post_creation_date %}
+            dateTrans('{{ post_date.year }}-{{ post_date.month }}-{{ post_date.day }} {{ post_date.hour }}:{{ post_date.minute }}', 'post-{{ el.post_id }}');
+        </script>
         <div class="card-body d-flex flex-column">
             <h4 class="card-title">{{ el.title }}</h4>
             <p class="card-text">{{ el.header }}</p>

@@ -8,6 +8,7 @@ app.secret_key = 'stepan24icsanov'
 DATABASE = '/templates/posts.db'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///posts.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 db = SQLAlchemy(app)
 moment = Moment(app)
 from webapp.admin import admin

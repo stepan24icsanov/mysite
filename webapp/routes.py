@@ -1,4 +1,4 @@
-from flask import render_template
+from flask import render_template, jsonify
 from webapp import app
 import datetime
 
@@ -12,6 +12,7 @@ def index():
 def about():
     return render_template('about.html')
 
-
-
+@app.route('/stepan')
+def stepan():
+    return jsonify({'stepan': 'stepan'})
 

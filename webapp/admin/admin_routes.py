@@ -66,7 +66,7 @@ def create_article():
         try:
             db.session.add(post)
             db.session.commit()
-            return redirect('/articles')
+            return redirect(url_for('.edit_articles'))
         except:
             return 'Error'
     else:

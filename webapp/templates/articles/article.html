@@ -1,12 +1,17 @@
 {% extends 'base.html' %}
 
+{% block title %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="/static/js/script_test.js"></script>
+{% endblock %}
+
 
 {% block body %}
 <h1>{{ post.title }}</h1>
 <h2>{{ post.header }}</h2>
 <h3>Дата создания: {{ moment(post.post_creation_date, local=False).format('HH:mm | D MMMM YYYY года', refresh=False) }}</h3>
 <p>{{ post.text }}</p>
-<div class="comments">
+<div class="add_comments">
     <h1>Комментарии</h1>
     {% if current_user.is_authenticated %}
     <form method="post">
@@ -23,7 +28,9 @@
         <a href="/login?next={{ request.path }}">Войдите</a> или <a href="/register">зарегистрируйтесь</a>, чтобы оставить комментарий
     {% endif %}
 </form>
+</div>
 
+<div class="comments">
 {% for comment in comments %}
 <div class="card">
   <div class="card-header">
@@ -37,6 +44,7 @@
   </div>
 </div>
 {% endfor %}
-
 </div>
+
+
 {% endblock %}
