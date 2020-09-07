@@ -40,15 +40,3 @@ def show_post(post_id):
     comments = Comment.query.filter_by(post_id=post_id).all()
     return render_template('/articles/article.html', post=post, comments=comments)
 
-
-@arti.route('/get_comment_update')
-def get_comment_update():
-    post_id = request.args.get('post_id')
-    current_count_comments = int(request.args.get('current_count_comments'))
-    comment_list = Comment.query.filter_by(post_id=post_id).all()
-    new_comments = {'new_comments': []}
-    for comment in comment_list[current_count_comments:]:
-        new_comments['new_comments'].append({'user': comment.user_name,
-                                             'text': comment.text
-                                             })
-    return jsonify(new_comments)

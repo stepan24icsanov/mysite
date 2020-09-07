@@ -1,26 +1,23 @@
 $(document).ready(function() {
-    setInterval(getNewComments, 3000);
+    let socket = io.connect('http://127.0.0.1:5000');
+    socket.on('connect', () => {
+    console.log('User connected');
+    });
 
-    function getNewComments() {
-    let count_comments = $('.card').length;
-    let post_id = window.location.pathname.slice(10);
-    $.get('/articles/get_comment_update',
-    {'post_id': post_id,
-    'current_count_comments': count_comments
-    },
-    addComment
-    )};
-    function addComment(data) {
-    for (let comment of data['new_comments']) {
+    socket.on('message', function(comment) {
         $('.comments').append(`<div class="card">
-        <div class="card-header">${comment.user}</div>
-        <div>Только что</div>
+        <div class="card-header">${comment[0]}</div>
+        <div>${moment.utc(comment[2]).local().format('HH:mm | D MMMM YYYY года')}</div>
         <div class="card-body">
         <blockquote class="blockquote mb-0">
-        <p>${comment.text}</p>
+        <p>${comment[1]}</p>
         </blockquote>
         </div>
         </div>`);
-        }
-        }
+        console.log(comment);
+    });
+
+    $('#comments').on('submit', function() {
+        socket.send($('#text').val());
+    });
 });
