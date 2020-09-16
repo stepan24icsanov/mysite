@@ -1,1 +1,1 @@
-web: gunicorn --workers=3 -k geventwebsocket.gunicorn.workers.GeventWebSocketWorker -w 1 runner:app
+web: gunicorn --workers=3 --threads=3 -k geventwebsocket.gunicorn.workers.GeventWebSocketWorker -w 1 runner:app
