@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    let socket = io.connect('https://' + document.domain + ':' + location.port);
+    let socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
     socket.on('connect', () => {
     console.log('User connected');
     });
