@@ -22,8 +22,6 @@ def user_login_page():
         return jsonify({'status': 'wrong password'})
 
 
-
-
 @app.route('/register', methods=['GET', 'POST'])
 def user_register_page():
     if request.method == 'POST':
@@ -46,7 +44,7 @@ def user_register_page():
         except:
             return 'error'
 
-        return redirect('/login')
+        return redirect('/')
     else:
         return render_template('auth/register_page.html')
 
@@ -57,6 +55,3 @@ def user_logout_page():
     logout_user()
     next_page = request.args.get('next')
     return redirect(next_page)
-
-
-
